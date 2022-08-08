@@ -14,21 +14,21 @@ def download_url(url, outdir):
 class YOLOv3:
     def __init__(
             self,
-            yolo_weights_file: str,
-            yolo_cfg_file: str,
             device,
+            yolo_weights_file: str = None,
+            yolo_cfg_file: str = None,
             img_size=416,
             person_detector=False,
             video=False,
             return_dict=False
     ):
-        if not os.path.isfile(yolo_weights_file):
+        if yolo_weights_file is None or not os.path.isfile(yolo_weights_file):
             os.makedirs(os.path.dirname(yolo_weights_file), exist_ok=True)
             url = 'https://pjreddie.com/media/files/yolov3.weights'
             outdir = os.path.dirname(yolo_weights_file)
             download_url(url, outdir)
 
-        if not os.path.isfile(yolo_cfg_file):
+        if yolo_cfg_file is None or not os.path.isfile(yolo_cfg_file):
             os.makedirs(os.path.dirname(yolo_cfg_file), exist_ok=True)
             url = 'https://raw.githubusercontent.com/mkocabas/yolov3-pytorch/master/yolov3/config/yolov3.cfg'
             outdir = os.path.dirname(yolo_cfg_file)
